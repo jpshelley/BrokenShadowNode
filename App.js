@@ -6,13 +6,15 @@
 
 import React, { Component } from "react";
 import {
-  ImageBackground,
+  Button,
+  Image,
   Platform,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View
 } from "react-native";
-import styles from './styles';
+import styles from "./styles";
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -21,37 +23,65 @@ const instructions = Platform.select({
     "Shake or press menu button for dev menu"
 });
 
-type Props = {};
-class AppImpl extends Component<Props> {
+const CloseIcon = require("./exit.png");
+
+class Modal extends Component {
   render() {
+    if (!this.props.visible) return <View />;
+
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+      <View style={styles.modal}>
+        <View style={styles.modalContainer}>
+          <TouchableOpacity
+            style={styles.closeIcon}
+            onPress={this.props.onDismiss}
+          >
+            <Image resizeMode="contain" source={CloseIcon} />
+          </TouchableOpacity>
+          <Text style={styles.titleText}>This is a Modal</Text>
+          <Text style={styles.subtitleText}>
+            To show the broken shadow node
+          </Text>
+          <View style={styles.actionsContainer}>
+            <Button
+              style={styles.ctaButton}
+              title="Dismiss"
+              onPress={this.props.onDismiss}
+            />
+          </View>
+        </View>
       </View>
     );
   }
 }
 
-class Modal extends Component {
-  render () {
-    if (!this.props.visible) return (<View />)
-
-    return (
-      <View style={styles.modal}>
-        <Text> This is a Modal </Text>
-      </View>
-    )
-  }
-}
-
 export default class App extends Component {
+  state = {
+    visible: false
+  };
+
+  onShow = () => {
+    this.setState({
+      visible: true
+    });
+  }
+
+  onDismiss = () => {
+    this.setState({
+      visible: false
+    });
+  };
+
   render() {
     return (
       <React.Fragment>
-        <AppImpl />
-        <Modal visible={true}/>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>Welcome to React Native!</Text>
+          <Text style={styles.instructions}>To get started, edit App.js</Text>
+          <Text style={styles.instructions}>{instructions}</Text>
+          <Button style={styles.ctaButton} title="Show Modal" onPress={this.onShow} />
+        </View>
+        <Modal visible={this.state.visible} onDismiss={this.onDismiss} />
       </React.Fragment>
     );
   }
