@@ -75,7 +75,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <View style={{flex: 1}}>
         <View style={styles.container}>
           <Text style={styles.welcome}>Welcome to React Native!</Text>
           <Text style={styles.instructions}>To get started, edit App.js</Text>
@@ -104,7 +104,7 @@ export default class App extends Component {
           />
         </View>
         <Modal visible={this.state.visible} onDismiss={this.onDismiss} />
-      </React.Fragment>
+      </View>
     );
   }
 }

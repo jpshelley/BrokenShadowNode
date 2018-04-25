@@ -10,7 +10,8 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    zIndex: 10000
   },
   container: {
     flex: 1,
@@ -45,20 +46,6 @@ export default StyleSheet.create({
     fontSize: 14,
     marginTop: 12,
     color: '#e6f2ff',
-  },
-  textInput: {
-    marginTop: 8,
-    height: 30,
-    paddingTop: 4,
-    paddingBottom: 4,
-    borderColor: '#a7aeb5',
-    borderWidth: 1,
-    width: '100%',
-    backgroundColor: 'transparent',
-    color: 'white',
-  },
-  inputSelectionColor: {
-    color: '#003852'
   },
   actionsContainer: {
     flexDirection: 'row',
